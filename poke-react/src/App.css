@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+body {
+  background-image: url('/pokemon-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  background-attachment: fixed; 
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
