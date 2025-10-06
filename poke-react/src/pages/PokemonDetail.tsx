@@ -35,7 +35,7 @@ function PokemonDetail() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 600, margin: "20px auto", padding: 2 }}>
+      <Card sx={{ maxWidth: 600, margin: "20px auto", padding: 2, opacity: 0.9 }}>
         <Box display="flex" alignItems="center">
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <IconButton aria-label="go back to home">
@@ -86,6 +86,32 @@ function PokemonDetail() {
               Abilities:{" "}
               {pokemon.abilities.map((a: any) => a.ability.name).join(", ")}
             </Typography>
+            <Box mt={2}>
+              <Typography>
+                Moves ({pokemon.moves.length}):
+              </Typography>
+              <Box display="flex" flexWrap="wrap" gap={1} mt={1}>
+                {pokemon.moves.slice(0, 10).map((m: any, index: number) => (
+                  <Typography
+                    key={index}
+                    sx={{
+                      bgcolor: "rgba(25, 118, 210, 0.1)",
+                      px: 1,
+                      py: 0.5,
+                      borderRadius: 1,
+                      fontSize: "0.875rem",
+                    }}
+                  >
+                    {m.move.name}
+                  </Typography>
+                ))}
+                {pokemon.moves.length > 10 && (
+                  <Typography sx={{ color: "#aaa", alignSelf: "center" }}>
+                    +{pokemon.moves.length - 10} more
+                  </Typography>
+                )}
+              </Box>
+            </Box>
             <Typography>
               Height: {pokemon.height} | Weight: {pokemon.weight}
             </Typography>
@@ -93,7 +119,10 @@ function PokemonDetail() {
         </CardContent>
       </Card>
 
-      <ImageModal imageUrl={selectedImage} onClose={() => setSelectedImage(null)} />
+      <ImageModal
+        imageUrl={selectedImage}
+        onClose={() => setSelectedImage(null)}
+      />
     </>
   );
 }
