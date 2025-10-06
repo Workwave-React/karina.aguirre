@@ -3,10 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Box, Card, CardContent, CircularProgress, Typography, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { getPokemonDetail } from "../services/pokeApi";
-import Modal from "react-modal";
 import ImageModal from "../components/ImageModalProps";
-
-Modal.setAppElement("#root");
 
 function PokemonDetail() {
   const { name } = useParams<{ name: string }>();
