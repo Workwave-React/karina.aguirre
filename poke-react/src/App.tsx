@@ -5,10 +5,12 @@ import AppRoutes from "./routes/AppRoutes";
 function App() {
   useEffect(() => {
     const backgrounds = [
-      '/pokemon-bg.jpg',
-      '/pokemon-bg2.jpg',
+      "/pokemon-bg.jpg",
+      "/pokemon-bg2.jpg",
+      "/pokemon-bg3.jpg",
+      "/pokemon-bg4.jpg",
     ];
-    
+
     let currentIndex = 0;
 
     const interval = setInterval(() => {

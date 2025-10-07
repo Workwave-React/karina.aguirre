@@ -14,3 +14,13 @@ export const getPokemonDetail = async (name: string) => {
   const response = await axios.get(`${BASE_URL}/pokemon/${name}`);
   return response.data;
 };
+
+export const getAllPokemon = async () => {
+  const response = await axios.get(`${BASE_URL}/pokemon?limit=2000`);
+  return response.data.results;
+};
+
+export const getPokemonTypes = async () => {
+  const response = await axios.get(`${BASE_URL}/type`);
+  return response.data.results;
+};
