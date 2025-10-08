@@ -11,21 +11,24 @@ function App() {
       "/pokemon-bg4.jpg",
     ];
 
+    const preloaded = backgrounds.map((src) => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
+
     let currentIndex = 0;
+    document.body.style.backgroundImage = `url('${backgrounds[currentIndex]}')`;
 
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % backgrounds.length;
       document.body.style.backgroundImage = `url('${backgrounds[currentIndex]}')`;
-    }, 5000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <>
-      <AppRoutes />
-    </>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
