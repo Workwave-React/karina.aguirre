@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import SearchBar from "./SearchBar";
 import TypeFilter from "./TypeFilter";
 import MoveFilter from "./MoveFilter";
+import {PokemonType} from "../../types/types";
 
 type Props = {
   searchQuery: string;

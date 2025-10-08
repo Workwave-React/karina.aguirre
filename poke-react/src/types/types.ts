@@ -1,21 +1,21 @@
-type Pokemon = {
+export type Pokemon = {
   name: string;
   url: string;
 };
 
-type PokemonDetail = {
+export type PokemonDetail = {
   name: string;
   types: Array<{ type: { name: string } }>;
   moves: Array<{ move: { name: string } }>;
 };
 
-type UseFiltersProps = {
+export type UseFiltersProps = {
   allPokemon: Pokemon[];
   pokemonDetailsCache: Map<string, PokemonDetail>;
   setPokemonDetailsCache: (cache: Map<string, PokemonDetail>) => void;
 };
 
-type PokemonType = {
+export type PokemonType = {
   name: string;
   url: string;
 };

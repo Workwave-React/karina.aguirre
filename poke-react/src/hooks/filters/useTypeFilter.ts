@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import {Pokemon, PokemonDetail} from "../../types/types";
 
 export function useTypeFilter(
   filteredPokemon: Pokemon[],

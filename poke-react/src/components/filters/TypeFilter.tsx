@@ -1,4 +1,5 @@
 import { Autocomplete, TextField, Chip } from "@mui/material";
+import {PokemonType} from "../../types/types";
 
 type Props = {
   types: PokemonType[];

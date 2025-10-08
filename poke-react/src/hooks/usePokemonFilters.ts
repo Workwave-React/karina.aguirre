@@ -3,6 +3,7 @@ import { getPokemonDetail } from "../services/pokeApi";
 import { useSearchFilter } from "./filters/useSearchFilter";
 import { useTypeFilter } from "./filters/useTypeFilter";
 import { useMoveFilter } from "./filters/useMoveFilter";
+import {Pokemon, PokemonDetail} from "../types/types";
 
 type UseFiltersProps = {
   allPokemon: Pokemon[];
