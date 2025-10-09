@@ -4,11 +4,15 @@ import { Box, Card, CardContent, CircularProgress, Typography, IconButton } from
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { getPokemonDetail } from "../services/pokeApi";
 import ImageModal from "../components/ImageModalProps";
+import { useAudio } from "../hooks/useAudio";
+import { VolumeUp } from "@mui/icons-material";
 
 function PokemonDetail() {
   const { name } = useParams<{ name: string }>();
   const [pokemon, setPokemon] = useState<any>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const cryUrl = pokemon?.cries?.latest || pokemon?.cries?.legacy || null;
+  const { play, isPlaying } = useAudio(cryUrl);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +39,9 @@ function PokemonDetail() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 600, margin: "20px auto", padding: 2, opacity: 0.9 }}>
+      <Card
+        sx={{ maxWidth: 600, margin: "20px auto", padding: 2, opacity: 0.9 }}
+      >
         <Box display="flex" alignItems="center">
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <IconButton aria-label="go back to home">
@@ -45,9 +51,24 @@ function PokemonDetail() {
         </Box>
 
         <CardContent>
-          <Typography variant="h4" align="center">
-            {pokemon.name.toUpperCase()}
-          </Typography>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={1}
+          >
+            <Typography variant="h4">{pokemon.name.toUpperCase()}</Typography>
+
+            {cryUrl && (
+              <IconButton
+                onClick={play}
+                color={isPlaying ? "primary" : "default"}
+                aria-label="play pokemon cry"
+              >
+                <VolumeUp />
+              </IconButton>
+            )}
+          </Box>
 
           <Box
             display="flex"
@@ -87,9 +108,7 @@ function PokemonDetail() {
               {pokemon.abilities.map((a: any) => a.ability.name).join(", ")}
             </Typography>
             <Box mt={2}>
-              <Typography>
-                Moves ({pokemon.moves.length}):
-              </Typography>
+              <Typography>Moves ({pokemon.moves.length}):</Typography>
               <Box display="flex" flexWrap="wrap" gap={1} mt={1}>
                 {pokemon.moves.slice(0, 10).map((m: any, index: number) => (
                   <Typography
