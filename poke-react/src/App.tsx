@@ -1,8 +1,14 @@
 import { useEffect } from "react";
 import "./App.css";
+import { AppProvider, useApp } from "./context/AppContext";
+import { lightTheme, darkTheme } from "./components/constants/theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 
-function App() {
+function AppContent() {
+  const { theme } = useApp();
+  const currentTheme = theme === "light" ? lightTheme : darkTheme;
+
   useEffect(() => {
     const backgrounds = [
       "/pokemon-bg.jpg",
@@ -19,6 +25,9 @@ function App() {
 
     let currentIndex = 0;
     document.body.style.backgroundImage = `url('${backgrounds[currentIndex]}')`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
 
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % backgrounds.length;
@@ -28,7 +37,28 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (theme === "light") {
+      document.body.style.setProperty(
+        "--theme-overlay",
+        "rgba(255, 255, 255, 0.1)"
+      );
+    } else {
+      document.body.style.setProperty("--theme-overlay", "rgba(0, 0, 0, 0.4)");
+    }
+  }, [theme]);
+
   return <AppRoutes />;
+}
+
+function App() {
+  return (
+    <AppProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AppProvider>
+  );
 }
 
 export default App;
