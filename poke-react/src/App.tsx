@@ -4,6 +4,7 @@ import { AppProvider, useApp } from "./context/AppContext";
 import { lightTheme, darkTheme } from "./components/constants/theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
+import { CompareProvider } from "./context/CompareContext";
 
 function AppContent() {
   const { theme } = useApp();
@@ -54,9 +55,11 @@ function AppContent() {
 function App() {
   return (
     <AppProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <CompareProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </CompareProvider>
     </AppProvider>
   );
 }

@@ -8,6 +8,7 @@ import FiltersBar from "../components/filters/FiltersBar";
 import PokemonCard from "./PokemonCard";
 import LimitSelector from "./pagination/LimitSelector";
 import ControlsBar from "./ControlsBar";
+import CompareBar from "./CompareBar";
 
 function PokemonList() {
   const { theme, viewMode } = useApp();
@@ -128,6 +129,7 @@ function PokemonList() {
           />
         </Box>
       )}
+      <CompareBar />
     </>
   );
 }

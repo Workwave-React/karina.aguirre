@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Box, Card, CardContent, CircularProgress, Typography, IconButton } from "@mui/material";
+import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from "recharts";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { getPokemonDetail } from "../services/pokeApi";
 import ImageModal from "../components/ImageModalProps";
@@ -98,7 +99,41 @@ function PokemonDetail() {
                 )
             )}
           </Box>
-
+          <Box mt={3}>
+            <Typography variant="h6" gutterBottom>
+              Base Stats
+            </Typography>
+            <Box
+              sx={{ height: 300, display: "flex", justifyContent: "center" }}
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart
+                  data={pokemon.stats.map((stat: any) => ({
+                    stat: stat.stat.name
+                      .replace("special-attack", "Sp. Atk")
+                      .replace("special-defense", "Sp. Def")
+                      .replace("hp", "HP")
+                      .replace("attack", "Attack")
+                      .replace("defense", "Defense")
+                      .replace("speed", "Speed"),
+                    value: stat.base_stat,
+                  }))}
+                >
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="stat" />
+                  <PolarRadiusAxis angle={90} domain={[0, 150]} />
+                  <Radar
+                    name={pokemon.name}
+                    dataKey="value"
+                    stroke="#1976d2"
+                    fill="#1976d2"
+                    fillOpacity={0.6}
+                  />
+                  <Tooltip />
+                </RadarChart>
+              </ResponsiveContainer>
+            </Box>
+          </Box>
           <Box mt={2}>
             <Typography>
               Types: {pokemon.types.map((t: any) => t.type.name).join(", ")}
